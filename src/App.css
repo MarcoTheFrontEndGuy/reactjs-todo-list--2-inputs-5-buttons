@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 70%;
+  margin: auto;
 }
 
 .App-logo {
@@ -35,4 +37,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.task-row { 
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  margin: 10px;
+  border: 1px solid #334400;
+}
+
+.task-row button {
+  max-height: 40px;
+  border: 1px solid aqua;
+  background: magenta;
+  color: white;
 }

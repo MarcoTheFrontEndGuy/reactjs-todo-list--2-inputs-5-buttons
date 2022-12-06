@@ -1,61 +1,64 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
-import { useState } from 'react';
 
-function App() {
-  const [todos, setTodos] = useState([]);
-  const [todo, setTodo] = useState("");
 
-  function handleSubmit(e) {
+export default function App() {
+  const [todo, setTodo] = useState([]);
+  const [newTask, setNewTask] = useState("");
+  const [completed, setCompleted] = useState([]); 
+
+
+  const createTask = (e) => {
+    setNewTask(e.target.value);
+  }
+
+  const addTask = (e) => {
     e.preventDefault();
 
     const newTodo = {
       id: new Date().getTime(),
-      text: todo,             
+      task: newTask,
       completed: false,
     }
 
-    setTodos([...todos, newTodo]);
-    setTodo("");
+    setTodo([...todo, newTodo]);
+    setNewTask("");
 
   }
 
 
-  function deleteTodo(id) {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-
-    setTodos(updatedTodos);
+  const deleteTask = (id) => {
+    setTodo((todo.filter((todo) => todo.id !== id)));
   }
 
 
-  function toggleComplete(id) {
-    const updatedTodos = todos.map((todo) => {
-      if(todo.id === id) {
-        todo.completed = !todo.completed;
-      }
-        return todo
-    });
-
-    setTodos(updatedTodos);
-    
+  const toggleComplete = (id) => {
+      setTodo( (todo.map((todo) => {
+        if(todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      })));
   }
+
 
 
   return (
-    <div className="App">
-      <form onSubmit={ handleSubmit}>
-
-        <input type="text" onChange={(e) => setTodo(e.target.value)} value={todo} />   {/*2 way data binding */} 
-        <button type="submit">Add Todo</button>
+    <div className='App'>
+      <h1>Todo App - React JS - useState - Marco</h1>
+      <hr />
+      
+      <form onSubmit={addTask}>
+        <input type="text" onChange={ (e) => createTask(e)} value={newTask} />
+        <button type="submit">addTask</button>
       </form>
 
-      {todos.map((todo) => <div key={todo.id}>
-          <div>{todo.text} </div>
-          <button onClick={() => deleteTodo(todo.id) } >delete</button>
-          <input type="checkbox" onChange={() => toggleComplete(todo.id)} checked={todo.completed} />
-        </div> )}
-    </div>
-  );
-}
+      {todo.map((todo) => <div key={todo.id} className='task-row'>
+          <input onClick={ () => toggleComplete(todo.id) } type="checkbox" />
+          <h3>{todo.task}</h3>
+          <button onClick={() => deleteTask(todo.id)} >delete</button>
 
-export default App;
+        </div>)}
+    </div>
+  )
+}

@@ -1,0 +1,19 @@
+WHAT IS A TODO LIST APP?
+
+A todo app is an array of objects. you keep the state of the todo array 
+Every object you add comes with 
+- property id: unique id to compare every time you add, delete or update each todo task 
+- property text: a text "task to do"
+- property completed: set to false
+
+a todo object is created onSubmit, as the input to enter the task is a form element and data is sent onSubmit 
+
+function createTask(e) {
+    e.preventDefault();
+
+    const newTask = {
+        id: new Date().getTime(),
+        task: todo.task,
+        completed: false,
+    }
+}
