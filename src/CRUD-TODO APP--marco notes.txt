@@ -1,0 +1,89 @@
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+
+
+
+function App() {
+  const [todos, setTodos] = useState([]);
+  const [todo, setTodo] = useState("");
+  
+
+##############################################
+//CREATE TASK WITH INPUT VALUE
+##############################################
+  1. const [todo, setTodo] = useState("");
+
+  2. function handleChange(e) {
+        setTodo(e.target.value);
+     }
+
+  3.  <input type="text" onChange={(e) => handleChange(e))} value={todo} />   
+
+
+
+
+##############################################
+//ADD CREATED TASK TO TODO LIST 
+##############################################
+  1. const [todos, setTodos] = useState([]);
+
+
+  2. function handleSubmit(e) {
+        e.preventDefault();
+
+        const newTodo = {
+            id: new Date().getTime(),
+            text: todo,             
+            completed: false,
+        }
+
+        setTodos([...todos, newTodo]);
+        setTodo("");
+
+    }
+
+
+ {todos.map((todo) => <div key={todo.id}>
+          <div>{todo.text} </div>
+          <button onClick={() => deleteTodo(todo.id) } >delete</button>
+    </div> )}
+
+
+
+##############################################
+DELETE TASK FROM TODO LIST 
+##############################################
+
+  function deleteTodo(id) {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+
+    setTodos(updatedTodos);
+  }
+
+
+    {todos.map((todo) => <div key={todo.id}>
+          <div>{todo.text} </div>
+          <button onClick={() => deleteTodo(todo.id) } >delete</button>
+        </div> )}
+
+        
+##############################################
+
+  return (
+    <div className="App">
+      <form onSubmit={ handleSubmit}>
+
+        <input type="text" onChange={(e) => handleChange(e))} value={todo} />   
+        <button type="submit">Add Todo</button>
+      </form>
+
+      {todos.map((todo) => <div key={todo.id}>
+          <div>{todo.text} </div>
+          <button onClick={() => deleteTodo(todo.id) } >delete</button>
+        </div> )}
+    </div>
+  );
+}
+
+export default App;
