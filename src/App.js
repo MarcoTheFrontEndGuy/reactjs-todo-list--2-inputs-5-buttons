@@ -7,9 +7,9 @@ export default function App() {
   const [newTask, setNewTask] = useState("");
   const [completed, setCompleted] = useState([]); 
 
-  const [todoEditing, setTodoEditing] = useState(null);
+  const [todoEditing, setTodoEditing] = useState(null);   //get the todo id on click to edit
+  const [editingText, setEditingText] = useState("");     //get the new text to edit the todo item
 
-  
   const createTask = (e) => {
     setNewTask(e.target.value);
   }
@@ -46,10 +46,19 @@ export default function App() {
       })));
   }
 
+  const editTodo = (id) => {
+    setTodo( (todo.map( (todo) => {
+        if(todo.id === id) {
+            todo.task = editingText;
+        }
+        return todo
+    })));
+
+    setTodoEditing(null);
+    setEditingText("");
+  }
 
 
-
-// =============================================================
   return (
     <div className='App'>
       <h1>Todo App - React JS - useState - Marco</h1>
@@ -61,9 +70,25 @@ export default function App() {
       </form>
 
       {todo.map((todo) => <div key={todo.id} className='task-row'>
+
+        {todoEditing === todo.id ?
+            <input 
+                type="text" 
+                onChange={ (e) => setEditingText(e.target.value) } 
+                value={editingText} 
+            />
+            : 
+            <h3>{todo.task}</h3>
+        }
           <input onClick={ () => toggleComplete(todo.id) } type="checkbox" />
-          <h3>{todo.task}</h3>
+
+
           <button onClick={() => deleteTask(todo.id)} >delete</button>
+
+          {todoEditing === todo.id ? <button onClick={ () => editTodo(todo.id)}>Submit Edits</button>
+          :<button onClick={ () => setTodoEditing(todo.id) }>edit Todo</button>
+
+          }
 
         </div>)}
     </div>
