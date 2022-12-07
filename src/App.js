@@ -7,10 +7,9 @@ export default function App() {
   const [newTask, setNewTask] = useState("");
   const [completed, setCompleted] = useState([]); 
 
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [editText, setEditText] = useState("");
+  const [todoEditing, setTodoEditing] = useState(null);
 
-
+  
   const createTask = (e) => {
     setNewTask(e.target.value);
   }
