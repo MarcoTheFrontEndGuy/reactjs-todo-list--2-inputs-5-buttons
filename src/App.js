@@ -21,8 +21,13 @@ export default function App() {
       completed: false,
     }
 
-    setTodo([...todo, newTodo]);
-    setNewTask("");
+    if(newTodo.task === "") {
+      alert("Please type a task");
+    }else{
+      setTodo([...todo, newTodo]);
+      setNewTask("");
+    }
+
 
   }
 
