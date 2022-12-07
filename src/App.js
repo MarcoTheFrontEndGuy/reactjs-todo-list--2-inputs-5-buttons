@@ -7,6 +7,9 @@ export default function App() {
   const [newTask, setNewTask] = useState("");
   const [completed, setCompleted] = useState([]); 
 
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [editText, setEditText] = useState("");
+
 
   const createTask = (e) => {
     setNewTask(e.target.value);
@@ -31,11 +34,9 @@ export default function App() {
 
   }
 
-
   const deleteTask = (id) => {
     setTodo((todo.filter((todo) => todo.id !== id)));
   }
-
 
   const toggleComplete = (id) => {
       setTodo( (todo.map((todo) => {
@@ -48,6 +49,8 @@ export default function App() {
 
 
 
+
+// =============================================================
   return (
     <div className='App'>
       <h1>Todo App - React JS - useState - Marco</h1>
@@ -66,4 +69,9 @@ export default function App() {
         </div>)}
     </div>
   )
+
+ 
+      
+
+  
 }
