@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 
 
@@ -9,6 +9,8 @@ export default function App() {
 
   const [todoEditing, setTodoEditing] = useState(null);   //get the todo id on click to edit
   const [editingText, setEditingText] = useState("");     //get the new text to edit the todo item
+
+
 
   const createTask = (e) => {
     setNewTask(e.target.value);
@@ -80,15 +82,16 @@ export default function App() {
             : 
             <h3>{todo.task}</h3>
         }
+
+          <div className='todo-buttons'>
           <input onClick={ () => toggleComplete(todo.id) } type="checkbox" />
-
-
           <button onClick={() => deleteTask(todo.id)} >delete</button>
 
           {todoEditing === todo.id ? <button onClick={ () => editTodo(todo.id)}>Submit Edits</button>
           :<button onClick={ () => setTodoEditing(todo.id) }>edit Todo</button>
 
           }
+          </div>
 
         </div>)}
     </div>

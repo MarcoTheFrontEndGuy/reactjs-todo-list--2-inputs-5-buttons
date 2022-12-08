@@ -41,12 +41,15 @@
 
 .task-row { 
   width: 700px;
+  width: 50vw;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   padding: 2px;
   margin: 10px;
   border: 1px solid #334400;
+
 }
 
 .task-row button {
