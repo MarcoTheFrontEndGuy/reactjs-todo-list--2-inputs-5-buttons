@@ -4,12 +4,24 @@ import './todoApp-marco-css.css';
 export default function App() {
   const [todo, setTodo] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [todoId, setTodoId ] = useState(null);
+  const [todoNewTask, setTodoNewTask] = useState("");
+  const [isCompleted, setIsCompleted] = useState([]);
 
 
-  // const createTask = (e) => {
-  //   if(e.target.value === "") {
-  //   }
+  const todoIdEdit = (id) => {
+    setTodoId(id);
+  }
+
+  // const todoIdEdit = (id) => {
+  //   setTodoId( todo.filter( (todo) => {
+  //     if(todo.id === id) {
+  //       return id;
+  //     }
+  //   }))
   // }
+
+
   const addTask = (e) => {
     e.preventDefault();
 
@@ -18,7 +30,9 @@ export default function App() {
       task: newTask,
       completed: false
     }
-
+    if(todoId) {
+      setTodoId(null);
+    }
     if(newTask === "") {
       alert("Please type a task for this week");
     } else {
@@ -40,7 +54,10 @@ export default function App() {
     setTodo( todo.map( (todo) => {
       if(todo.id === id) {
         todo.completed = !todo.completed;
-      }
+
+        console.log(todo.completed);
+        } 
+      
       return todo;
 
     }))
@@ -48,6 +65,28 @@ export default function App() {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+  const submitNewTask = (id) => {
+    setTodo( (todo.map((todo) => {
+      if(todo.id === id) {
+        todo.task = todoNewTask;
+        todo.completed = false;
+      }
+      return todo;
+    })))
+
+    setTodoId(null);
+
+  }
 
   return (
     <div>
@@ -68,11 +107,29 @@ export default function App() {
 
           {todo.map((todo) => (
             <div key={todo.id} className='todo-item'>
-              <h4>{todo.task}</h4>
+              {todoId !== todo.id ?
+              // <h4 className='checked'>{todo.task}</h4>
+              
+              <h4 className={`checked ${todo.completed ? "line-through" : ""}`}>{todo.task}</h4>
+              :
+              <input type="text" onChange={(e) => setTodoNewTask(e.target.value)} value={todoNewTask} />
+            }
+              
+
+
               <div className='todo-item__buttons'>
-                <input type="checkbox"  onChange={ () => toggleCompleted(todo.id)}  />
-                <button className='basic-button'>edit</button>
-                <button className='basic-button' onClick={ () => deleteTask(todo.id)} >delete</button>
+              {todoId !== todo.id ? 
+                <>
+                  <input type="checkbox"  onChange={ () => toggleCompleted(todo.id)}  />
+                  <button className='basic-button' onClick={() => todoIdEdit(todo.id) }> edit </button>
+                  <button className='basic-button' onClick={ () => deleteTask(todo.id)} >delete</button>
+                </>
+                :
+                <>
+                <button className='basic-button' onClick={ () => submitNewTask(todo.id)} >submit edit</button>
+                </>
+              }
+                
               </div>
             </div>
           ))}

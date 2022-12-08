@@ -58,3 +58,12 @@
   background: magenta;
   color: white;
 }
+
+.checked {
+  text-decoration: line-through;
+  flex-grow: 1;
+}
+
+h4 {
+  background-color: yellow;
+}
