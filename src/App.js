@@ -1,104 +1,97 @@
-import React, { useState, useEffect } from 'react'
-import './App.css';
-
+import React, { useState } from 'react'
+import './todoApp-marco-css.css';
 
 export default function App() {
   const [todo, setTodo] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const [completed, setCompleted] = useState([]); 
-
-  const [todoEditing, setTodoEditing] = useState(null);   //get the todo id on click to edit
-  const [editingText, setEditingText] = useState("");     //get the new text to edit the todo item
 
 
-
-  const createTask = (e) => {
-    setNewTask(e.target.value);
-  }
-
+  // const createTask = (e) => {
+  //   if(e.target.value === "") {
+  //   }
+  // }
   const addTask = (e) => {
     e.preventDefault();
 
     const newTodo = {
       id: new Date().getTime(),
       task: newTask,
-      completed: false,
+      completed: false
     }
 
-    if(newTodo.task === "") {
-      alert("Please type a task");
-    }else{
+    if(newTask === "") {
+      alert("Please type a task for this week");
+    } else {
       setTodo([...todo, newTodo]);
       setNewTask("");
     }
-
-
   }
 
   const deleteTask = (id) => {
-    setTodo((todo.filter((todo) => todo.id !== id)));
+    setTodo( todo.filter((todo) => {
+      return todo.id !== id;
+    }))
+    return todo;
   }
 
-  const toggleComplete = (id) => {
-      setTodo( (todo.map((todo) => {
-        if(todo.id === id) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      })));
+
+  const toggleCompleted = (id) => {
+  
+    setTodo( todo.map( (todo) => {
+      if(todo.id === id) {
+        todo.completed = !todo.completed;
+      }
+      return todo;
+
+    }))
+  
   }
 
-  const editTodo = (id) => {
-    setTodo( (todo.map( (todo) => {
-        if(todo.id === id) {
-            todo.task = editingText;
-        }
-        return todo
-    })));
-
-    setTodoEditing(null);
-    setEditingText("");
-  }
 
 
   return (
-    <div className='App'>
-      <h1>Todo App - React JS - useState - Marco</h1>
-      <hr />
-      
-      <form onSubmit={addTask}>
-        <input type="text" onChange={ (e) => createTask(e)} value={newTask} />
-        <button type="submit">addTask</button>
-      </form>
+    <div>
+      <h1>React JS - Todo App - Marco from the scratch</h1>
 
-      {todo.map((todo) => <div key={todo.id} className='task-row'>
+      <div className='todo-app'>
+        <h2>Todo App</h2>          
+        <h4>Tasks for the week</h4>
 
-        {todoEditing === todo.id ?
-            <input 
-                type="text" 
-                onChange={ (e) => setEditingText(e.target.value) } 
-                value={editingText} 
-            />
-            : 
-            <h3>{todo.task}</h3>
-        }
+        <form onSubmit={addTask}>
+          <input className="input-task" type="text" onChange={(e) => setNewTask(e.target.value)} value={newTask}  />
 
-          <div className='todo-buttons'>
-          <input onClick={ () => toggleComplete(todo.id) } type="checkbox" />
-          <button onClick={() => deleteTask(todo.id)} >delete</button>
+          <button className="button-input-task" type="submit">add task</button>
 
-          {todoEditing === todo.id ? <button onClick={ () => editTodo(todo.id)}>Submit Edits</button>
-          :<button onClick={ () => setTodoEditing(todo.id) }>edit Todo</button>
+        </form>
 
-          }
-          </div>
+        <div className='tasks-container'>
 
-        </div>)}
+          {todo.map((todo) => (
+            <div key={todo.id} className='todo-item'>
+              <h4>{todo.task}</h4>
+              <div className='todo-item__buttons'>
+                <input type="checkbox"  onChange={ () => toggleCompleted(todo.id)}  />
+                <button className='basic-button'>edit</button>
+                <button className='basic-button' onClick={ () => deleteTask(todo.id)} >delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+            {/* const toggleCompleted = (id) => {
+              
+              setTodo((todo) => {
+                if(todo.id === id) {
+                  todo.completed = !todo.completed;
+                }
+                return todo
+              })
+            
+            } */}
+
+
     </div>
   )
-
- 
-      
-
-  
 }
