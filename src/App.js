@@ -59,6 +59,13 @@ export default function App() {
   
   }
 
+  const inputValueEditNewTask = (e) => {
+    setTodoNewTask(e.target.value);
+    e.target.focus();
+    console.log(e.target.value);
+  } 
+
+  
   const submitNewTask = (id) => {
     setTodo( (todo.map((todo) => {
       if(todo.id === id) {
@@ -69,6 +76,7 @@ export default function App() {
     })))
 
     setTodoId(null);
+    setTodoNewTask(""); ///////////////////// this line is new today 09-12-2022
 
   }
 
@@ -94,13 +102,15 @@ export default function App() {
               {todoId !== todo.id ?              
                 <h4 className={`checked ${todo.completed ? "line-through" : ""}`}>{todo.task}</h4>
               :
-                <input type="text" onChange={(e) => setTodoNewTask(e.target.value)} value={todoNewTask} />
+                // <input type="text" className="inputToEditTask" onChange={(e) => setTodoNewTask(e.target.value)} value={todoNewTask} />
+
+                <input type="text" className="inputToEditTask" onChange={(e) => inputValueEditNewTask(e)} value={todoNewTask} />
               }
               
               <div className='todo-item__buttons'>
               {todoId !== todo.id ? 
                 <>
-                <label for={todo.id}>
+                <label htmlFor={todo.id}>
 
                 <FaCheckSquare className='buttonIcon'/>
                   <input type="checkbox"  className="inputCheckbox-hidden" id={todo.id} onChange={ () => toggleCompleted(todo.id)}  />

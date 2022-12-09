@@ -1,10 +1,19 @@
 @media screen and (max-width: 700px) {
+    form {
+        margin-bottom: 30px;
+    }
+
     .todo-item {
         background: orange;
         border: 20px solid skyblue;
         flex-wrap: wrap;
     }
 
+    /* .input-task, input[type="text"] {   */
+    .input-task, .button-input-task, input[type="text"] {
+        margin: 7px 0;
+    }
+    
     .checked {
         max-width: 80%;
         flex-basis: 550px;

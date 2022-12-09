@@ -23,10 +23,33 @@ body {
     border: 3px solid #444;
 }
 
-.input-task, .button-input-task {
+/* .input-task, .button-input-task {
     border: 2px solid rgb(0, 0, 0);
     padding: 10px;
     margin: 20px 0;
+} */
+
+.input-task, .button-input-task, input[type="text"] {
+/* .button-input-task, input[type="text"] { */
+    background-color: #BCCF86;
+    padding: 10px;
+    margin: 20px 0;
+    outline: none;
+    border: none
+}
+
+.input-task {
+    background-color: #BCCF86;
+    padding: 10px;
+    /* margin: 20px 0; */
+    margin: 7px 0;
+    outline: none;
+    border: none
+}
+
+.inputToEditTask {
+    flex-grow: 1;
+    border-bottom: 1px solid black;
 }
 
 .button-input-task {
@@ -81,13 +104,23 @@ body {
     display: none;
 }
 
-.buttonIcon {
+/* .buttonIcon {
     width: 25px;
     height: 25px;
     margin: 0 5px;
     color: #333;
     transition: all .5s;
+} */
+.buttonIcon {
+    width: 18px;
+    height: 18px;
+    margin: 0 2px;
+    color: #333;
+    transition: all .5s;
 }
+
+
+
 .buttonIcon:hover {
     color: rgb(0, 0, 0);
     transform: scale(1.4, 1.4);
