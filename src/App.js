@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
 import './todoApp-marco-css.css';
+import './todoApp-mediaqueries-marco-css.css';
+
+import { FaCheckSquare, FaTrashAlt } from "react-icons/fa";
+import { BsPencilSquare } from "react-icons/bs";
+
 
 export default function App() {
   const [todo, setTodo] = useState([]);
@@ -9,17 +14,10 @@ export default function App() {
   const [isCompleted, setIsCompleted] = useState([]);
 
 
+
   const todoIdEdit = (id) => {
     setTodoId(id);
   }
-
-  // const todoIdEdit = (id) => {
-  //   setTodoId( todo.filter( (todo) => {
-  //     if(todo.id === id) {
-  //       return id;
-  //     }
-  //   }))
-  // }
 
 
   const addTask = (e) => {
@@ -41,6 +39,7 @@ export default function App() {
     }
   }
 
+
   const deleteTask = (id) => {
     setTodo( todo.filter((todo) => {
       return todo.id !== id;
@@ -50,30 +49,15 @@ export default function App() {
 
 
   const toggleCompleted = (id) => {
-  
     setTodo( todo.map( (todo) => {
       if(todo.id === id) {
         todo.completed = !todo.completed;
-
-        console.log(todo.completed);
         } 
       
       return todo;
-
     }))
   
   }
-
-
-
-
-
-
-
-
-
-
-
 
   const submitNewTask = (id) => {
     setTodo( (todo.map((todo) => {
@@ -107,22 +91,22 @@ export default function App() {
 
           {todo.map((todo) => (
             <div key={todo.id} className='todo-item'>
-              {todoId !== todo.id ?
-              // <h4 className='checked'>{todo.task}</h4>
-              
-              <h4 className={`checked ${todo.completed ? "line-through" : ""}`}>{todo.task}</h4>
+              {todoId !== todo.id ?              
+                <h4 className={`checked ${todo.completed ? "line-through" : ""}`}>{todo.task}</h4>
               :
-              <input type="text" onChange={(e) => setTodoNewTask(e.target.value)} value={todoNewTask} />
-            }
+                <input type="text" onChange={(e) => setTodoNewTask(e.target.value)} value={todoNewTask} />
+              }
               
-
-
               <div className='todo-item__buttons'>
               {todoId !== todo.id ? 
                 <>
-                  <input type="checkbox"  onChange={ () => toggleCompleted(todo.id)}  />
-                  <button className='basic-button' onClick={() => todoIdEdit(todo.id) }> edit </button>
-                  <button className='basic-button' onClick={ () => deleteTask(todo.id)} >delete</button>
+                <label for={todo.id}>
+
+                <FaCheckSquare className='buttonIcon'/>
+                  <input type="checkbox"  className="inputCheckbox-hidden" id={todo.id} onChange={ () => toggleCompleted(todo.id)}  />
+                </label>
+                  <BsPencilSquare className='buttonIcon' onClick={() => todoIdEdit(todo.id) } /> 
+                  <FaTrashAlt className='buttonIcon' onClick={ () => deleteTask(todo.id)}  />
                 </>
                 :
                 <>
@@ -136,18 +120,6 @@ export default function App() {
         </div>
 
       </div>
-
-            {/* const toggleCompleted = (id) => {
-              
-              setTodo((todo) => {
-                if(todo.id === id) {
-                  todo.completed = !todo.completed;
-                }
-                return todo
-              })
-            
-            } */}
-
 
     </div>
   )
