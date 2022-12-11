@@ -16,35 +16,29 @@ body {
     margin: auto;
     padding: 40px;
     border-radius: 20px;
-    /* border-top-right-radius: 20px; */
     background-color: #fff;
     background-color: #9BB84A;
     margin-top: 60px;
     border: 3px solid #444;
 }
 
-/* .input-task, .button-input-task {
-    border: 2px solid rgb(0, 0, 0);
-    padding: 10px;
-    margin: 20px 0;
-} */
-
-.input-task, .button-input-task, input[type="text"] {
-/* .button-input-task, input[type="text"] { */
+.button-add-task { 
     background-color: #BCCF86;
     padding: 10px;
     margin: 20px 0;
     outline: none;
     border: none
-}
+} 
 
-.input-task {
+.input-add-task, 
+.inputToEditTask {
     background-color: #BCCF86;
     padding: 10px;
-    /* margin: 20px 0; */
     margin: 7px 0;
+    margin-right: 10px;
     outline: none;
-    border: none
+    border: none;
+    border-radius: 6px;
 }
 
 .inputToEditTask {
@@ -52,12 +46,17 @@ body {
     border-bottom: 1px solid black;
 }
 
-.button-input-task {
+/* .button-input-task, */
+.button-add-task {
     margin-left: 20px;
     border-color: #555;
     box-shadow: 2px 1px 3px #333;
     border-radius: 8px;
     transition: all .1s;
+}
+
+.warningSendingEmptyInput {
+    border: 1px solid red;
 }
 
 .todo-item__buttons {
@@ -76,9 +75,11 @@ body {
     transition: all .1s;
 }
 
-.button-input-task:active {
+/* .button-input-task:active, */
+.button-add-task:active {
     box-shadow: 1px 0 1px #444;
 }
+
 .todo-item {
     display: flex;
     justify-content: space-between;
@@ -91,10 +92,9 @@ body {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.checked {
-    /* flex-grow: 1; */
+/* .checked {
     position: relative;
-}
+} */
 
 .line-through {
     text-decoration: line-through;
@@ -104,13 +104,6 @@ body {
     display: none;
 }
 
-/* .buttonIcon {
-    width: 25px;
-    height: 25px;
-    margin: 0 5px;
-    color: #333;
-    transition: all .5s;
-} */
 .buttonIcon {
     width: 18px;
     height: 18px;
@@ -118,8 +111,6 @@ body {
     color: #333;
     transition: all .5s;
 }
-
-
 
 .buttonIcon:hover {
     color: rgb(0, 0, 0);

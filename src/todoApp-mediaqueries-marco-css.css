@@ -1,24 +1,33 @@
 @media screen and (max-width: 700px) {
     form {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .todo-item {
-        background: orange;
-        border: 20px solid skyblue;
+        /* background: orange;
+        border: 20px solid skyblue; */
         flex-wrap: wrap;
     }
 
     /* .input-task, input[type="text"] {   */
-    .input-task, .button-input-task, input[type="text"] {
+    .input-task, .button-input-task, /*input[type="text"] */ {
         margin: 7px 0;
+    }
+    
+    .button-add-task {
+        margin: 7px 0;
+    }
+    
+    .input-add-task {
+        border-bottom: 1px solid #555;
+        margin: 7px 0;
+        margin-right: 10px;
     }
     
     .checked {
         max-width: 80%;
         flex-basis: 550px;
         margin-bottom: 15px;
-
     }
 }
 

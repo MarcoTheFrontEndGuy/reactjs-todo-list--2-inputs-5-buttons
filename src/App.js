@@ -12,12 +12,23 @@ export default function App() {
   const [todoId, setTodoId ] = useState(null);
   const [todoNewTask, setTodoNewTask] = useState("");
   const [isCompleted, setIsCompleted] = useState([]);
-
+  const [addEmptyTask, setAddEmptyTask] = useState(false);
 
 
   const todoIdEdit = (id) => {
     setTodoId(id);
   }
+
+
+  const createTask = (e) => {
+    setAddEmptyTask(false);
+    setNewTask(e.target.value)
+  };
+  
+
+
+
+
 
 
   const addTask = (e) => {
@@ -32,10 +43,12 @@ export default function App() {
       setTodoId(null);
     }
     if(newTask === "") {
-      alert("Please type a task for this week");
+      // alert("Please type a task for this week");
+      setAddEmptyTask(true);
     } else {
       setTodo([...todo, newTodo]);
       setNewTask("");
+      setAddEmptyTask(false);
     }
   }
 
@@ -89,9 +102,13 @@ export default function App() {
         <h4>Tasks for the week</h4>
 
         <form onSubmit={addTask}>
-          <input className="input-task" type="text" onChange={(e) => setNewTask(e.target.value)} value={newTask}  />
+          {/* <input className="input-add-task" type="text" onChange={(e) => setNewTask(e.target.value)} value={newTask}  />
+          <button className="button-add-task" type="submit">add task</button> */}
+          <input className={`input-add-task ${addEmptyTask && "warningSendingEmptyInput"}`} type="text" onChange={ (e) => createTask(e)}   value={newTask}  placeholder="Enter a task here"/>
 
-          <button className="button-input-task" type="submit">add task</button>
+
+
+          <button className="button-add-task" type="submit">add task</button>
 
         </form>
 
@@ -120,7 +137,7 @@ export default function App() {
                 </>
                 :
                 <>
-                <button className='basic-button' onClick={ () => submitNewTask(todo.id)} >submit edit</button>
+                <button className='basic-button' onClick={ () => submitNewTask(todo.id)} >edit task</button>
                 </>
               }
                 
